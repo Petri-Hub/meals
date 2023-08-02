@@ -5,7 +5,7 @@ import IMeal from "../interfaces/IMeal"
 import { FaArrowLeft } from "react-icons/fa"
 import Api from "../service/Api"
 import { TbToolsKitchen2 } from 'react-icons/tb'
-import RecipeCardSkeleton from "../components/RecipeCardSkeleton"
+import MealCardSkeleton from "../components/RecipeCardSkeleton"
 import RecipeCard from "../components/RecipeCard"
 
 export default function CategoryPage() {
@@ -85,18 +85,19 @@ export default function CategoryPage() {
                   {
                      categoryMeals.length && category
                         ? (
-                           categoryMeals.map(meal => <RecipeCard key={meal.idMeal} {...meal}/>)
+                           <div></div>
+                           // categoryMeals.map(meal => <RecipeCard key={meal.idMeal} {...meal}/>)
                         ) : (
                            <>
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
-                              <RecipeCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
+                              <MealCardSkeleton />
                            </>
                         )
                   }

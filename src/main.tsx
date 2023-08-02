@@ -7,7 +7,10 @@ import HomePage from './routes/HomePage.tsx'
 import CategoryPage from './routes/CategoryPage.tsx'
 import RecipesPage from './routes/RecipesPage.tsx'
 
-const ROUTER = createBrowserRouter([
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+const router = createBrowserRouter([
    {
       path: '/',
       element: <Root />,
@@ -31,6 +34,6 @@ const ROUTER = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
    <React.StrictMode>
-      <RouterProvider router={ROUTER} />
+      <RouterProvider router={router} />
    </React.StrictMode>,
 )

@@ -8,7 +8,7 @@ export default function Banner() {
          />
          <div className='absolute w-full h-full bg-black top-0 left-0 opacity-40'></div>
          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 flex flex-col gap-y-6 -translate-y-1/2'>
-            <h1 className='text-center text-6xl relative tracking-widest uppercase text-medium font-extrabold text-white'>
+            <h1 className='text-center text-6xl relative tracking-widest uppercase text-medium font-extrabold text-rose-600'>
                Meals
             </h1>
             <p className='font-medium text-white text-xl text-center'>

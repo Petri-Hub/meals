@@ -62,7 +62,7 @@ export default function RecipesPage() {
                            <p className="font-bold pr-2 ">{index + 1}.</p>
                            <div className="border-l border-solid pl-2 border-zinc-200">
                               <p className="capitalize font-bold px-2">{allIngredients[index]}</p>
-                              <p className="px-2 text-sm text-zinc-500">{measure}</p>
+                              <p className="px-2 italic text-sm text-zinc-500">{measure}</p>
                            </div>
 
                         </li>

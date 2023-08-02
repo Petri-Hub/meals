@@ -1,10 +1,6 @@
-export default function RecipeCardSkeleton() {
+export default function MealCardSkeleton() {
    return (
-      <article
-         className={
-            'border border-solid border-zinc-200 rounded-lg overflow-hidden'
-         }
-      >
+      <div className='border w-full border-solid border-zinc-200 rounded-lg overflow-hidden'>
          <div className='w-full relative'>
             <div className='w-full bg-zinc-300 aspect-square animate-pulse' />
          </div>
@@ -17,6 +13,6 @@ export default function RecipeCardSkeleton() {
                <div className='w-12 h-5 cursor-pointer duration-200 px-2 rounded bg-zinc-200'></div>
             </div>
          </div>
-      </article>
+      </div>
    )
 }
