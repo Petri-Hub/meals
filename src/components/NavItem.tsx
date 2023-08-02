@@ -1,6 +1,4 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
-import * as Popover from '@radix-ui/react-popover'
-import { useState } from 'react'
 import { HiChevronDown } from 'react-icons/hi'
 
 interface NavItemProps {

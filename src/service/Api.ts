@@ -34,7 +34,7 @@ export default abstract class Api {
       }
    }
 
-   public static async getMealByID(id: string): Promise<IMeal> {
+   public static async getMealByID(id: string): Promise<IMeal | null> {
       try {
          const response = await Api.fetchJSON<{ meals: IMeal[] }>(
             Api.getBaseURL() + `lookup.php?i=${id}`,

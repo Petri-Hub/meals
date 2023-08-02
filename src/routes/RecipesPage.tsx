@@ -4,7 +4,6 @@ import Api from "../service/Api"
 import IMeal from "../interfaces/IMeal"
 import { FaListOl, FaExternalLinkAlt } from 'react-icons/fa'
 import { BsYoutube } from 'react-icons/bs'
-import { BiLinkExternal } from 'react-icons/bi'
 
 export default function RecipesPage() {
 
