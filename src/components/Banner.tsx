@@ -3,7 +3,7 @@ export default function Banner() {
       <div className='relative w-full h-96 overflow-hidden'>
          <img
             className='absolute top-0 left-0  w-full h-full object-cover blur-[3px]'
-            src='./src/images/banner.jpeg'
+            src='/banner.jpeg'
             alt=''
          />
          <div className='absolute w-full h-full bg-black top-0 left-0 opacity-40'></div>
