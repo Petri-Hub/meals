@@ -6,7 +6,6 @@ import { FaArrowLeft } from "react-icons/fa"
 import Api from "../service/Api"
 import { TbToolsKitchen2 } from 'react-icons/tb'
 import MealCardSkeleton from "../components/RecipeCardSkeleton"
-import RecipeCard from "../components/RecipeCard"
 
 export default function CategoryPage() {
 
