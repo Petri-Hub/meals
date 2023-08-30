@@ -1,7 +1,7 @@
-import Banner from "../components/Banner";
-import MealCardSkeleton from '../components/RecipeCardSkeleton'
+import HeroSection from "../components/HeroSection";
+import MealCardSkeleton from '../components/MealCardSkeleton'
 import { BiFoodMenu } from 'react-icons/bi'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import MealsContext from "../context/MealsContext";
 import { PiFire } from 'react-icons/pi'
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import MealCard from "../components/MealCard/MealCard";
 import Section from "../components/Section/Section";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useSwiper } from 'swiper/react'
+import SearchSection from "../components/SearchSection";
 
 export default function HomePage() {
    const { categories, trending } = useContext(MealsContext)
@@ -17,26 +18,70 @@ export default function HomePage() {
       return !trending.length
    }
 
+   useEffect(() => {
+      document.title = "Meals | Home"
+   }, [])
+
    return (
       <>
 
-         <Banner />
+         <HeroSection />
 
 
          <div className='w-full px-4 md:px-8 flex-col flex gap-y-32 lg:px-16 py-16'>
 
-            {/* Seção de categorias */}
+
+            <Section>
+               <Section.Header
+                  icon={PiFire}
+                  title="Tending"
+                  description="Famous recipes searched by the users"
+                  options={<>
+                     <button
+                        onClick={() => useSwiper}
+                        className="h-10 rounded border-solid border-zinc-200 hover:bg-zinc-100 duration-100 text-zinc-black border grid place-items-center aspect-square"
+                     >
+                        <FaChevronLeft />
+                     </button>
+                     <button className="h-10 rounded border-solid border-zinc-200 hover:bg-zinc-100 duration-100 text-zinc-black border grid place-items-center aspect-square"><FaChevronRight /></button>
+                  </>}
+               />
+               <Section.Swiper>
+                  {
+                     isTrendingLoading()
+                        ? Array(12).fill(null).map((_, index) => <MealCardSkeleton key={index} />)
+                        : trending.map(meal => {
+                           return (
+                              <MealCard key={meal.idMeal} meal={meal}>
+                                 <MealCard.Thumb />
+                                 <MealCard.Info>
+                                    <MealCard.Title />
+                                    <MealCard.Category />
+                                    {/* <MealCard.Tags /> */}
+                                 </MealCard.Info>
+                              </MealCard>
+                           )
+                        })
+                  }
+               </Section.Swiper>
+
+            </Section>
+            <SearchSection />
+
+
             <Section>
                <Section.Header
                   icon={BiFoodMenu}
                   title="Browse by Categories"
                   description="Get what you want to see"
                />
+
+
                <Section.Grid>
                   {
                      categories.length ? categories.map(category => {
                         return (
-                           <Link to={`/categories/${category.strCategory.toLowerCase()}`} className='group relative w-full h-32 overflow-hidden flex rounded-lg cursor-pointer border border-solid border-zinc-200'>
+                           <Link to={`/categories/${category.strCategory.toLowerCase()}`} className='group relative w-full h-32 overflow-hidden flex rounded-lg cursor-pointer shadow'>
                               <div className="h-full aspect-[4/3] overflow-hidden flex-shrink-0">
 
                                  <img src={category.strCategoryThumb} alt={category.strCategory} className='group-hover:scale-110 duration-200 object-cover object-center bg-zinc-100 h-full ' />
@@ -62,41 +107,6 @@ export default function HomePage() {
                </Section.Grid>
             </Section>
 
-            <Section>
-               <Section.Header
-                  icon={PiFire}
-                  title="Tending"
-                  description="Famous recipes searched by the users"
-                  options={<>
-                     <button
-                     onClick={() => useSwiper}
-                        className="h-10 rounded border-solid border-zinc-200 hover:bg-zinc-100 duration-100 text-zinc-black border grid place-items-center aspect-square"
-                     >
-                        <FaChevronLeft />
-                     </button>
-                     <button className="h-10 rounded border-solid border-zinc-200 hover:bg-zinc-100 duration-100 text-zinc-black border grid place-items-center aspect-square"><FaChevronRight /></button>
-                  </>}
-               />
-               <Section.Swiper>
-                  {
-                     isTrendingLoading()
-                        ? Array(6).fill(null).map((_, index) => <MealCardSkeleton key={index} />)
-                        : trending.map(meal => {
-                           return (
-                              <MealCard key={meal.idMeal} meal={meal}>
-                                 <MealCard.Thumb />
-                                 <MealCard.Info>
-                                    <MealCard.Title />
-                                    <MealCard.Category />
-                                    <MealCard.Tags />
-                                 </MealCard.Info>
-                              </MealCard>
-                           )
-                        })
-                  }
-               </Section.Swiper>
-
-            </Section>
          </div >
 
       </>

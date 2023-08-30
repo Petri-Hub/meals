@@ -6,7 +6,7 @@ type Props = {
 
 export default function MealCardInfo({ children }: Props) {
    return (
-      <div className='p-4 flex flex-col gap-1'>
+      <div className='p-4 flex flex-col absolute w-full bottom-0 gap-1'>
          { children }
       </div>
    )

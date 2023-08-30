@@ -24,10 +24,14 @@ export default function Error404Page() {
          <h1 className="text-black font-bold text-2xl">Oops!</h1>
          <p className="text-lg text-zinc-500">An unexpected error has ocurred.</p>
 
-         <div className="p-2 px-3 flex items-center gap-x-2 bg-zinc-200 rounded">
-            <p className="rouded ">{status}</p>
-            <p className="border-l border-solid border-zinc-400 pl-2 italic">{statusText}</p>
-         </div>
+         {
+            status && statusText && (
+               <div className="p-2 px-3 flex items-center gap-x-2 bg-zinc-200 rounded">
+                  <p className="rouded ">{status}</p>
+                  <p className="pl-2 italic">{statusText ?? 'Unexpected Error'}</p>
+               </div>
+            )
+         }
 
          <Link to={'/'} className="flex items-center gap-x-2 rounded bg-rose-600 hover:bg-rose-700 text-white duration-200 px-4 py-2">
             <FaArrowLeft />

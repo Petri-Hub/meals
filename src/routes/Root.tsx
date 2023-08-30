@@ -16,14 +16,19 @@ export default function Root() {
       trending: []
    })
 
+   useEffect(() => {
+      localStorage.setItem('bookmarks', JSON.stringify([]))
+   }, [])
+
 
    useEffect(() => {
-      setTimeout(() => Api.getData().then((data) => setMealData(data)), 2000)
+      Api.getData().then((data) => setMealData(data))
    }, [])
 
    return (
       <>
          <MealsContext.Provider value={mealData}>
+            {/* <Topbar /> */}
             <Header />
             <Nav />
 

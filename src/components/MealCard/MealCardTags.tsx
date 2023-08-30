@@ -11,10 +11,10 @@ export default function MealCardTags() {
    return (
       <div className='flex  flex-wrap gap-2'>
          {
-            strTags.split(',').map((tag) => (
-               <Link className="rounded bg-zinc-200 duration-100 hover:bg-zinc-100 text-xs p-2 py-1" to={`/ingredients/${tag}`}>
+            strTags.split(',').map((tag: string) => (
+               <p key={tag} className="rounded capitalize bg-zinc-200 duration-100 hover:bg-zinc-100 text-xs p-2 py-1" to={`/ingredients/${tag}`}>
                   {tag}
-               </Link>
+               </p>
             ))
          }
       </div>

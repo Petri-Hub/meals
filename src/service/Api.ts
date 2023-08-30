@@ -3,6 +3,7 @@ import IArea from '../interfaces/IArea'
 import ICategory from '../interfaces/ICategory'
 import IIngredient from '../interfaces/IIngredient'
 import IMeal from '../interfaces/IMeal'
+import IMealReference from '../interfaces/IMealReference'
 import IMealsData from '../interfaces/IMealsData'
 
 export default abstract class Api {
@@ -15,7 +16,7 @@ export default abstract class Api {
             Api.getAllCategories(),
             Api.getAllIngredients(),
             Api.getAllAreas(),
-            Api.getMealsStartingWith(Utils.getRandomLetter()),
+            Api.getMealsStartingWith(Utils.getRandomLetterForTrending()),
          ])
 
          return {
@@ -48,9 +49,9 @@ export default abstract class Api {
       }
    }
 
-   public static async getMealsByCategory(category: string): Promise<IMeal[]> {
+   public static async getMealsByCategory(category: string): Promise<IMealReference[]> {
       try {
-         const response = await Api.fetchJSON<{ meals: IMeal[] }>(
+         const response = await Api.fetchJSON<{ meals: IMealReference[] }>(
             Api.getBaseURL() + `filter.php?c=${category}`,
          )
          const meals = response.meals ?? []

@@ -9,13 +9,13 @@ type Props = {
 
 export default function SectionHeader({ icon: Icon, title, description, options }: Props) {
    return (
-      <header className="w-full flex px-4 border-l border-r border-solid border-zinc-200 items-center justify-between gap-x-4">
+      <header className="w-full flex px-4 items-center justify-between gap-x-4">
 
          {/* Left Side */}
          <div className="flex gap-x-4 items-center">
             {Icon && <Icon className="text-rose-600 text-4xl" />}
             <div className="flex flex-col justify-center gap-y-1">
-               {title && <h2 className="text-base font-bold text-black">{title}</h2>}
+               {title && <h2 className="text-2xl text-black font-brand">{title}</h2>}
                {description && <p className="text-sm text-zinc-400">{description}</p>}
             </div>
          </div>

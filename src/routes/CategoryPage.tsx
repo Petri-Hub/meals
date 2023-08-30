@@ -1,34 +1,36 @@
 import { Link, useParams } from "react-router-dom"
 import { useContext, useState, useEffect } from 'react'
 import MealsContext from "../context/MealsContext"
-import IMeal from "../interfaces/IMeal"
 import { FaArrowLeft } from "react-icons/fa"
 import Api from "../service/Api"
 import { TbToolsKitchen2 } from 'react-icons/tb'
-import MealCardSkeleton from "../components/RecipeCardSkeleton"
+import MealCardSkeleton from "../components/MealCardSkeleton"
+import IMealReference from "../interfaces/IMealReference"
+import MealCard from "../components/MealCard/MealCard"
 
 export default function CategoryPage() {
 
    const { name } = useParams()
    const { categories } = useContext(MealsContext)
 
-   const [categoryMeals, setCategoryMeals] = useState<IMeal[]>([])
+   const [categoryMeals, setCategoryMeals] = useState<IMealReference[]>([])
    const category = categories.find(({ strCategory }) => strCategory.toLowerCase() === name)
-
-   console.log(categoryMeals);
-   
 
    useEffect(() => {
       Api.getMealsByCategory(name as string)
          .then(meals => setCategoryMeals(meals))
 
-   }, [])
+   }, [name])
+
+   useEffect(() => {
+      document.title = `Meals | ${category?.strCategory ?? "Loading..."}`
+   }, [category])
 
    return (
       <main className="p-16 flex flex-col items-center py-24">
 
 
-         <section className="grid w-[55%] relative grid-cols-2 gap-8 ">
+         <section className="grid w-[55%] md:w-[80%] relative grid-cols-2 gap-8 ">
             <Link to={'/'} className="col-span-2 bg-rose-600 py-3 px-4 rounded flex items-center gap-x-2 w-fit text-white">
                <FaArrowLeft />
                Go Back
@@ -36,11 +38,11 @@ export default function CategoryPage() {
             <div className="aspect-square h-min rounded-xl overflow-hidden">
                {
                   category
-                     ? <img src={category.strCategoryThumb} alt={category.strCategory} className="w-full h-full object-contain bg-zinc-100" />
+                     ? <img src={category.strCategoryThumb} alt={category.strCategory} className="w-full h-full object-contain bg-zinc-200" />
                      : <div className="bg-zinc-300 h-full w-full animate-pulse"></div>
                }
             </div>
-            <div className="flex flex-col gap-y-4">
+            <div className="flex relative flex-col gap-y-4 p-4">
                {
                   category
                      ? (
@@ -84,19 +86,18 @@ export default function CategoryPage() {
                   {
                      categoryMeals.length && category
                         ? (
-                           <div></div>
-                           // categoryMeals.map(meal => <RecipeCard key={meal.idMeal} {...meal}/>)
+                           categoryMeals.map(meal => (
+                              <MealCard key={meal.idMeal} meal={{ ...meal, strCategory: category.strCategory }}>
+                                 <MealCard.Thumb />
+                                 <MealCard.Info>
+                                    <MealCard.Title />
+                                    <MealCard.Category />
+                                 </MealCard.Info>
+                              </MealCard>
+                           ))
                         ) : (
                            <>
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
-                              <MealCardSkeleton />
+                              {Array(5).fill(null).map((_, index) => <MealCardSkeleton key={index} tags={false} />)}
                            </>
                         )
                   }

@@ -7,7 +7,7 @@ export default function MealCardCategory() {
    return (
       <Link
          to={`/categories/${strCategory.toLowerCase()}`}
-         className='text-zinc-600 w-fit mb-1 duration-200 hover:tracking-wider text-xs md:text-sm overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer'>
+         className='text-zinc-300 w-fit mb-1 duration-200 hover:tracking-wider text-xs md:text-sm overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer'>
          {strCategory}
       </Link>
    )

@@ -15,15 +15,15 @@ export default function CategoriesGalery({
 
    return (
       <div className='flex w-96 gap-x-4'>
-         <ul className='min-w-[120px] divide-y divide-solid divide-zinc-200'>
+         <ul className='min-w-[120px] divide-y divide-solid divide-zinc-100'>
             {
                categories.map((category) => {
                   return (
                      <Link to={`/categories/${category.strCategory.toLowerCase()}`}
                         key={category.idCategory}
                         className={`py-2 first:pt-0 last:pb-0 block hover:font-medium cursor-pointer  ${category.idCategory === categorySelected?.idCategory
-                              ? 'font-medium'
-                              : ''
+                           ? 'font-medium'
+                           : ''
                            }`}
                         onMouseEnter={() => setCategorySelected(category)}
                      >
@@ -36,19 +36,16 @@ export default function CategoriesGalery({
             {categorySelected ? (
                <div className='w-full flex-col flex gap-y-4'>
                   <img
-                     className='w-full rounded bg-zinc-200 object-cover aspect-square'
+                     style={{ animationDelay: '75ms'}}
+                     className='w-full rounded bg-zinc-100 object-cover aspect-square shadow-lg'
                      src={categorySelected.strCategoryThumb}
                      alt={categorySelected.strCategory}
                   />
-                  <p className='cursor-pointer text-lg font-medium text-rose-600'>
+                  <p style={{ animationDelay: '150ms'}} className='cursor-pointer text-lg mt-2 font-medium t'>
                      {categorySelected.strCategory}
                   </p>
-                  <p className='text-zinc-400 text-sm'>
+                  <p style={{ animationDelay: '225ms'}} className='text-zinc-400 text-sm'>
                      {categorySelected.strCategoryDescription.slice(0, 200)}...
-                  </p>
-                  <p className='flex items-center color cursor-pointer text-black gap-x-2'>
-                     See more
-                     <FaArrowRight />
                   </p>
                </div>
             ) : (

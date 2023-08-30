@@ -4,6 +4,9 @@ import Api from "../service/Api"
 import IMeal from "../interfaces/IMeal"
 import { FaListOl, FaExternalLinkAlt } from 'react-icons/fa'
 import { BsYoutube } from 'react-icons/bs'
+import Section from "../components/Section/Section"
+import IngredientCheck from "../components/IngredientCheck"
+import { TbSalad } from "react-icons/tb"
 
 export default function RecipesPage() {
 
@@ -13,23 +16,31 @@ export default function RecipesPage() {
 
    useEffect(() => {
       Api.getMealByID(id as string).then((meal) => setMeal(meal))
-   }, [])
+   }, [id])
+
+
+   useEffect(() => {
+      document.title = `Meals | ${meal?.strMeal ?? "Loading..."}`
+   }, [meal])
+
 
    if (!meal) {
       return <div></div>
    }
 
+   console.log(meal);
+   
    const allIngredients = Array(20).fill(null).map((_, index) => meal[`strIngredient${index + 1}` as keyof IMeal]).filter(Boolean)
    const allMeasures = Array(20).fill(null).map((_, index) => meal[`strMeasure${index + 1}` as keyof IMeal]).filter(Boolean)
 
    return (
       <main className="p-16 flex flex-col items-center py-24">
 
-         <section className="w-[55%] grid grid-cols-2 gap-8">
+         <section className="w-[55%] md:w-[65%] grid grid-cols-2 gap-8">
             <div className="overflow-hidden rounded-lg w-full aspect-square">
                <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-full object-cover" />
             </div>
-            <div className="flex-col flex gap-y-4">
+            <div className="flex-col flex gap-y-4 p-4 rounded-xl">
                <p className="text-xl text-zinc-400 pl-4 border-l-2 border-solid border-zinc-200 tracking-wider">{meal.strArea}</p>
                <h1 className="text-3xl font-bold tracking-wide">{meal.strMeal}</h1>
                <div className="flex items-center gap-x-2">
@@ -47,30 +58,29 @@ export default function RecipesPage() {
                   )}
                </div>
             </div>
-            <div className="col-span-2">
-               <div className='w-full mb-6 mt-16 grid grid-cols-category gap-x-4 items-center '>
-                  <FaListOl className='text-4xl text-rose-600' />
-                  <div className='flex flex-col gap-y-1'>
-                     <h2 className='text-sm md:text-base font-bold capitalize'>Necessary Ingredients</h2>
-                     <p className='text-sm text-zinc-400'>See all of the ingredients and it's measures</p>
-                  </div>
-               </div>
-               <ol className="flex flex-col gap-y-2">
+            <Section className="col-span-2 mt-24">
+               <Section.Header
+                  title="What you will need"
+                  description="See all the ingredients and their respective measures"
+                  icon={TbSalad}
+               />
+               <Section.Column>
                   {
-                     allMeasures.map((measure, index) => {
-                        return <li className="flex items-center p-1 gap-2">
-                           <p className="font-bold pr-2 ">{index + 1}.</p>
-                           <div className="border-l border-solid pl-2 border-zinc-200">
-                              <p className="capitalize font-bold px-2">{allIngredients[index]}</p>
-                              <p className="px-2 italic text-sm text-zinc-500">{measure}</p>
-                           </div>
-
-                        </li>
-                     })
+                     allMeasures.map((measure, index) => <IngredientCheck index={index} name={allIngredients[index]} measure={measure} />)
                   }
-               </ol>
-            </div>
+               </Section.Column>
+            </Section>
 
+            <Section className="col-span-2 mt-24">
+               <Section.Header
+                  title="Instructions"
+                  description="See all the steps to make it"
+                  icon={FaListOl}
+               />
+               <Section.Column className="gap-y-6">
+                  <p className="whitespace-pre-wrap">{meal.strInstructions}</p>
+               </Section.Column>
+            </Section>
          </section>
 
 

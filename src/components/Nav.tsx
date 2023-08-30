@@ -11,7 +11,7 @@ export default function Nav() {
    return (
       <NavigationMenu.Root
          delayDuration={0}
-         className='px-4 md:px-8 lg:px-16 text-xs md:text-sm border-b border-solid border-zinc-200'
+         className='mx-4 z-3 relative py-2 md:mx-8 lg:mx-16 text-xs md:text-sm'
       >
          <NavigationMenu.List className='flex md:gap-x-12 md:justify-start justify-between'>
             <NavItem title='Categories'>

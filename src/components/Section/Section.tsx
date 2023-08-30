@@ -2,14 +2,17 @@ import { ReactNode } from "react"
 import SectionHeader from "./SectionHeader"
 import SectionSwiper from "./SectionSwiper"
 import SectionGrid from "./SectionGrid"
+import SectionColumn from "./SectionColumn"
+import { twMerge } from "tailwind-merge"
 
 type Props = {
-   children: ReactNode
+   children: ReactNode,
+   className?: string
 }
 
-export default function Section({ children }: Props) {
+export default function Section({ children, className }: Props) {
    return (
-      <section className="w-full flex flex-col gap-y-6">
+      <section className={twMerge("w-full flex flex-col gap-y-6", className)}>
          {children}
       </section>
    )
@@ -18,3 +21,4 @@ export default function Section({ children }: Props) {
 Section.Header = SectionHeader
 Section.Grid = SectionGrid
 Section.Swiper = SectionSwiper
+Section.Column = SectionColumn
